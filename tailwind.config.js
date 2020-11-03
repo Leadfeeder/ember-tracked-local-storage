@@ -6,6 +6,9 @@ module.exports = {
         purple: '#7e55bd',
         blue: '#2DA2C5',
       },
+      transformOrigin: {
+        'full': '100%',
+      }
     },
     fontFamily: {
       'sans': ['Lato', 'sans-serif'],

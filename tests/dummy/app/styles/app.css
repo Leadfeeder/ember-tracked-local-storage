@@ -6,4 +6,8 @@
   .filter-invert {
     filter: invert(1);
   }
+
+  .h-6-vw {
+    height: 6vw;
+  }
 }
