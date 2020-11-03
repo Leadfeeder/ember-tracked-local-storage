@@ -1,1 +1,14 @@
-<TestComponent />
+<div class="page-container">
+  <TopBar />
+
+  <Header />
+
+  <div class="container mx-auto flex mt-12">
+    <div class="w-4/12 mr-10">
+      <Navigation />
+    </div>
+    <div class="w-8/12">
+      {{outlet}}
+    </div>
+  </div>
+</div>
