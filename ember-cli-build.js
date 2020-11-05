@@ -18,6 +18,10 @@ const purgeCSS = {
 
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
+    'ember-prism': {
+      'components': ['javascript', 'handlebars', 'markup', 'markup-templating'], //needs to be an array, or undefined.
+      'plugins': ['line-highlight']
+    },
 
     postcssOptions: {
       compile: {

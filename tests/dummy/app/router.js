@@ -8,6 +8,12 @@ export default class Router extends EmberRouter {
 
 Router.map(function() {
   this.route('index', { path: '/' });
-  this.route('demo');
+  this.route('installation');
+  this.route('how-to-use-it');
+  this.route('formats');
+  this.route('service-class');
+  this.route('global-prefixes');
   this.route('api-reference');
+  this.route('tracked-in-local-storage-api');
+  this.route('tracked-local-storage-service-api');
 });

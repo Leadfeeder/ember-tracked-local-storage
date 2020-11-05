@@ -1,0 +1,86 @@
+<ContentSection @title="trackedLocalStorage service" as |content|>
+  <content.P>
+    Find below the availble properties and methods of the <code class="inline-code">trackedLocalStorage</code> service.
+  </content.P>
+</ContentSection>
+
+<ContentSection @title="Properties" as |content|>
+  <content.P>
+    <ul class="list-disc pl-8">
+      <li >
+        <code class="inline-code">length</code>
+        <div>Returns the number of keys currently stored in the browser's local storage.</div>
+      </li>
+    </ul>
+  </content.P>
+</ContentSection>
+
+<ContentSection @title="Methods" as |content|>
+  <content.P>
+    <ul class="list-disc pl-8">
+      <li class="mb-8">
+        <code class="inline-code">getItem(keyName:string, skipPrefixes:string[])</code>
+        <div class="italic mb-1">returns: null|any</div>
+        <p class="mb-2">
+          Gets an specified item from local storage. Accepts an optional second arg to ignore listed prefixes.
+        </p>
+        <p class="italic">
+          Please note: getting an item with this method will always return a string and cannot format the result to a different type if required. Using
+          <code class="inline-code">trackedInLocalStorage</code> decorator is recommended instead.
+        </p>
+      </li>
+      <li class="mb-8">
+        <code class="inline-code">setItem(keyName:string, value:string, skipPrefixes:string[])</code>
+        <div class="italic mb-1">returns: void</div>
+        <div>
+          Sets an specified item from local storage. Accepts an optional second arg to ignore listed prefixes.
+        </div>
+      </li>
+      <li class="mb-8">
+        <code class="inline-code">removeItem(keyName:string, skipPrefixes:string[])</code>
+        <div class="italic mb-1">returns: void</div>
+        <div>
+          Removes a specified item from local storage. Accepts an optional second arg to ignore listed prefixes.
+        </div>
+      </li>
+      <li class="mb-8">
+        <code class="inline-code">clear()</code>
+        <div class="italic mb-1">returns: void</div>
+        <div>
+          Clears all keys in the browser's local storage.
+        </div>
+      </li>
+      <li class="mb-8">
+        <code class="inline-code">key(num:number)</code>
+        <div class="italic mb-1">returns: null|any</div>
+        <div>
+          Retreives the key at the specified number in local storage.
+        </div>
+      </li>
+      <li>
+        <code class="inline-code">setGlobalPrefix(name:string, value:string)</code>
+        <div class="italic mb-1">returns: null|any</div>
+        <div>
+          Sets a global prefix to be used whenever accessing a local storage value. More info can be found <LinkTo class="text-blue" @route="global-prefixes">here</LinkTo>.
+        </div>
+      </li>
+    </ul>
+    {{!-- <table class="table-auto">
+      <thead>
+        <tr>
+          <th class="p-2 text-center">Name</th>
+          <th class="p-2 text-center">Args</th>
+          <th class="p-2 text-center">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-4 py-2"><code class="inline-code">getItem</code><span class="italic text-sm">(number)</span></td>
+          <td class="border px-4 py-2"><code class="inline-code">(keyName:string, skipPrefixes:string[])</code></td>
+          <td class="border px-4 py-2">Returns the number of keys currently stored in the browser's local storage</td>
+        </tr>
+      </tbody>
+    </table> --}}
+  </content.P>
+</ContentSection>
+

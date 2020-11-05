@@ -1,0 +1,69 @@
+<ContentSection @title="Tracked local storage service" as |content|>
+  <content.P>
+    As well as the decorator described in the previous article, this addon also provides a service
+    which should be used to communicate with the local storage.
+  </content.P>
+
+  <content.Code
+    @code=
+"@service trackedLocalStorage"
+    @language="javascript"
+  />
+
+  <content.P>
+    There are two reasons which you may want to use this service. The first would be to manually remove
+    a tracked value in the local storage which is linked to a <code class="inline-code">@trackedInLocalStorage</code> decorator in another file.
+    For example, this <code class="inline-code">componentProp</code> property which is sycned to a component:
+  </content.P>
+
+  <content.Code
+    @code=
+"import Component from '@glimmer/component';
+
+export const COMPONENT_PROP_KEY = 'component-prop-key';
+
+export default class ExampleComponent extends Component {
+  @trackedInLocalStorage({ keyName: COMPONENT_PROP_KEY }) componentProp;
+}"
+    @language="javascript"
+  />
+
+  <content.P>
+    Can have it's local storage value manually removed in a route, without having to set up the decorator again:
+  </content.P>
+
+  <content.Code
+    @code=
+"import Route from '@ember/routing/route';
+import { COMPONENT_PROP_KEY } from 'app/components/example-component.js';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
+
+export default class ExampleRoute extends Route {
+  @service trackedLocalStorage;
+
+  @action
+  didTransition() {
+    this.trackedLocalStorage.removeItem(COMPONENT_PROP_KEY);
+  }
+}
+"
+    @language="javascript"
+  />
+
+  <content.P>
+    This is useful when you want to hold information in a certain route, for instance when a user
+    is entering information in a form, but then clear that information if they leave that route.
+  </content.P>
+
+  <content.Note>
+    The <code class="inline-code">keyName</code> option in this example tells the decorator which key to use to store the value in local storage. If this is omitted,
+    just the name of the decorated property will be used. However, when you need to reference the key in other files
+    (as in this example), it is better to use a variable like this.
+  </content.Note>
+
+  <content.P>
+    The other use of the service is to set up global prefixes for the local storage values, which is a useful
+    feature which we will explore in detail in the next section.
+  </content.P>
+</ContentSection>
