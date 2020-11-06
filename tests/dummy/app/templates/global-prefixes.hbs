@@ -42,25 +42,6 @@ export default class UserRoute extends Route {
   <content.P>
     And that's it! Now every property using the <code class="inline-code">@trackedInLocalStorage</code> decorator will be unique to the current user.
   </content.P>
-
-  <content.P>
-    However, you do have the option to ignore the prefix for certain properties if necessary.
-    To do this, pass the prefix name into the decorator's <code class="inline-code">skipPrefixes</code> option array:
-  </content.P>
-
-      <content.Code
-    @code=
-"import Component from '@glimmer/component';
-
-export default class ExampleComponent extends Component {
-  @trackedInLocalStorage({ skipPrefixes: ['user'] }) allUsersCanSeeThis;
-}"
-    @language="javascript"
-  />
-
-  <content.P>
-    Now the <code class="inline-code">allUsersCanSeeThis</code> property will be saved and displayed to all users who log in on the same browser.
-  </content.P>
 </ContentSection>
 
 <ContentSection @title="Skipping prefixes" as |content|>
