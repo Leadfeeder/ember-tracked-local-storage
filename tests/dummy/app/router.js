@@ -10,4 +10,5 @@ Router.map(function() {
   this.route('index', { path: '/' });
   this.route('demo');
   this.route('api-reference');
+  this.route('application-tests');
 });

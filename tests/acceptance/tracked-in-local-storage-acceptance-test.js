@@ -8,6 +8,10 @@ const page = {
   input: '[data-test-value-input]',
 };
 
+function visitTestRoute() {
+  return visit('/application-tests');
+}
+
 // eslint-disable-next-line max-lines-per-function
 module('Acceptance | tracked local storage', function(hooks) {
   setupApplicationTest(hooks);
@@ -22,7 +26,7 @@ module('Acceptance | tracked local storage', function(hooks) {
   test('basic getting and updating works and causes a template rerender', async function(assert) {
     const updatedValue = 'updated value';
 
-    await visit('/');
+    await visitTestRoute();
 
     assert.dom(page.value).hasText(TEST_DEFAULT_VALUE, 'it display default text');
     assert.notOk(trackedLocalStorage.getItem(TEST_KEY_NAME), 'value is not stored in local storage when default value is being used');
@@ -38,7 +42,7 @@ module('Acceptance | tracked local storage', function(hooks) {
     const updatedValue = 'updated value';
     trackedLocalStorage.setGlobalPrefix(testPrefixName, 1);
 
-    await visit('/');
+    await visitTestRoute();
     await fillIn(page.input, updatedValue);
 
     assert.dom(page.value).hasText(updatedValue, 'it shows the updated value when prefix matches');
@@ -53,7 +57,7 @@ module('Acceptance | tracked local storage', function(hooks) {
     const testPrefixName = 'test-prefix-name';
     const updatedValue = 'updated value';
 
-    await visit('/');
+    await visitTestRoute();
     await fillIn(page.input, updatedValue);
 
     assert.dom(page.value).hasText(updatedValue, 'it shows the updated value');

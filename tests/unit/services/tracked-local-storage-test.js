@@ -62,41 +62,39 @@ module('Unit | Service | tracked local storage', function(hooks) {
   });
 
   function assertSkipPrefixesWorks(assert, { skipPrefixes, expectedKey, label }) {
-    trackedLocalStorage.setItem(key, value, skipPrefixes);
+    trackedLocalStorage.setItem(testKey, testValue, skipPrefixes);
     let storedValue = window.localStorage.getItem(expectedKey);
-    assert.equal(storedValue, value, `set value is correct when skipping ${skippedPrefix} prefix`);
+    assert.equal(storedValue, testValue, `set value is correct when skipping ${skipPrefixes} prefix`);
 
-    storedValue = trackedLocalStorage.getItem(key, skipPrefixes);
-    assert.equal(storedValue, value, `get value is correct when skipping ${skippedPrefix} prefix`);
+    storedValue = trackedLocalStorage.getItem(testKey, skipPrefixes);
+    assert.equal(storedValue, testValue, `get value is correct when skipping ${skipPrefixes} prefix`);
 
-    trackedLocalStorage.removeItem(key, skipPrefixes);
+    trackedLocalStorage.removeItem(testKey, skipPrefixes);
     storedValue = window.localStorage.getItem(expectedKey);
-    assert.equal(storedValue, undefined, `stored value is removed when skipping ${skippedPrefix} prefix`);
+    assert.equal(storedValue, undefined, `stored value is removed when skipping ${skipPrefixes} prefix`);
   }
 
   test('it allows skipping prefixes via options', function(assert) {
     setTestPrefixes();
-    const key = 'testKey';
-    const value = 'testValue';
 
     // Skip user
-    assertPrefixesWork(assert, {
+    assertSkipPrefixesWorks(assert, {
       skipPrefixes: ['user'],
-      expectedKey: `2.${key}`,
+      expectedKey: `2.${testKey}`,
       label: 'user' }
     )
 
     // Skip account
-    assertPrefixesWork(assert, {
+    assertSkipPrefixesWorks(assert, {
       skipPrefixes: ['account'],
-      expectedKey: `1.${key}`,
+      expectedKey: `1.${testKey}`,
       label: 'account' }
     )
 
     // Skip all
-    assertPrefixesWork(assert, {
+    assertSkipPrefixesWorks(assert, {
       skipPrefixes: ['account', 'user'],
-      expectedKey: key,
+      expectedKey: testKey,
       label: 'all'
     })
   });
