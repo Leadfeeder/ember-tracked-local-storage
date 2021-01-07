@@ -50,7 +50,15 @@ export default class TrackedLocalStorage {
   getItem(keyName) {
     const { value } = this._getCell(keyName);
 
-    return value === DOES_NOT_EXIST ? null : JSON.parse(value);
+    if (value === DOES_NOT_EXIST) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(value);
+    } catch (e) {
+      return value;
+    }
   }
 
   /**
