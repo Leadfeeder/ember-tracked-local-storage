@@ -48,10 +48,9 @@ export default class TrackedLocalStorageService extends Service {
     if (existingPrefix) {
       existingPrefix.prefixValue = value;
     } else {
-      this._globalPrefixes = [
-        ...this._globalPrefixes,
-        { prefixName: name, prefixValue: value }
-      ].sort((a, b) => b.prefixName.localeCompare(a.prefixName));
+      this._globalPrefixes = [...this._globalPrefixes, { prefixName: name, prefixValue: value }].sort((a, b) =>
+        b.prefixName.localeCompare(a.prefixName)
+      );
     }
     // Ensure to trigger a rerender after prefix change so new values are taken into account
     this._trackedLocalStorage.triggerRerender();
@@ -86,7 +85,6 @@ export default class TrackedLocalStorageService extends Service {
   setItem(keyName, value, skipPrefixes) {
     try {
       this._validateKey(keyName);
-      this._validateValue(value);
       this._trackedLocalStorage.setItem(this._getPrefixedKey(keyName, skipPrefixes), value);
     } catch (err) {
       console.error(err);
@@ -136,18 +134,6 @@ export default class TrackedLocalStorageService extends Service {
   _validateKey(keyName) {
     if (isEmpty(keyName)) {
       throw new Error(`LocalStorage :: Key must not be empty.`);
-    }
-  }
-
-  /**
-   * Validates a value is present
-   *
-   * @param {string} value
-   * @returns {void}
-   */
-  _validateValue(value) {
-    if (isEmpty(value)) {
-      throw new Error(`LocalStorage :: Value must not be empty.`);
     }
   }
 }

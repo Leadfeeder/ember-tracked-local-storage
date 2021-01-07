@@ -21,7 +21,7 @@ module('Unit | Utility | tracked local storage', function(hooks) {
   test('it sets and gets a boolean item properly', function(assert) {
     trackedLocalStorage.setItem(testKey, true);
 
-    assert.equal(trackedLocalStorage.getItem(testKey), 'true', 'it set the item properly and retrieved as the string version');
+    assert.equal(trackedLocalStorage.getItem(testKey), true, 'it set the item properly');
   });
 
   test('it removes an item properly', function(assert) {

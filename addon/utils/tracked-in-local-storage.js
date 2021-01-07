@@ -1,26 +1,31 @@
 import macro from 'macro-decorators';
-import { isNone } from '@ember/utils';
 import { getOwner } from '@ember/application';
-import normalizeFromString from 'ember-tracked-local-storage/utils/normalize-from-string';
+import { isNone } from '@ember/utils';
 
 /**
  * Core macro used for decorating a property to be synced with and tracked in local storage
  *
  * @param {object} params
  * @param {string} params.keyName a custom keyName to be used instead of the property name
- * @param {string} params.format the format the value should be parsed as
  * @param {string} params.defaultValue the default value, which won't be stored in browser storage
  * @param {string[]} params.skipPrefixes an array telling which globally set prefixes should be ignored
  * @returns {macro}
  */
-export function trackedInLocalStorage({ keyName, format = 'string', defaultValue = '', skipPrefixes = [] } = {}) {
+export function trackedInLocalStorage({
+  keyName,
+  keyNameProperty,
+  defaultValue,
+  skipPrefixes = [],
+} = {}) {
   return macro({
     get(obj, key) {
-      return localStorageGet.call(this, { keyName: keyName || key, format, defaultValue, skipPrefixes });
+      const _keyName = this[keyNameProperty] || keyName || key;
+      return localStorageGet.call(this, { keyName: _keyName, defaultValue, skipPrefixes });
     },
 
     set(obj, key, value) {
-      return localStorageSet.call(this, { keyName: keyName || key, defaultValue, value, skipPrefixes });
+      const _keyName = this[keyNameProperty] || keyName || key;
+      return localStorageSet.call(this, { keyName: _keyName, defaultValue, value, skipPrefixes });
     },
   });
 }
@@ -30,14 +35,13 @@ export function trackedInLocalStorage({ keyName, format = 'string', defaultValue
  *
  * @param {object} params
  * @param {string} params.keyName
- * @param {string} params.format
  * @param {string} params.defaultValue
  * @param {string[]} params.skipPrefixes
  * @returns {string}
  */
-export function localStorageGet({ keyName, format, defaultValue, skipPrefixes }) {
+export function localStorageGet({ keyName, defaultValue, skipPrefixes }) {
   const lsValue = _getTrackedLocalStorageService(this).getItem(keyName, skipPrefixes);
-  return isNone(lsValue) ? defaultValue : normalizeFromString[format](lsValue);
+  return isNone(lsValue) ? defaultValue : lsValue;
 }
 
 /**
@@ -45,12 +49,11 @@ export function localStorageGet({ keyName, format, defaultValue, skipPrefixes })
  *
  * @param {object} params
  * @param {string} params.keyName
- * @param {string} params.format
  * @param {string} params.defaultValue
  * @param {string} params.value
  * @param {string[]} params.skipPrefixes
  * @returns {string}
-*/
+ */
 export function localStorageSet({ keyName, defaultValue, value, skipPrefixes }) {
   const trackedLocalStorage = _getTrackedLocalStorageService(this);
 
@@ -62,6 +65,7 @@ export function localStorageSet({ keyName, defaultValue, value, skipPrefixes }) 
 
   return value;
 }
+
 
 /**
  * Gets the tracked local storage service
