@@ -3,11 +3,30 @@
 @import "tailwindcss/utilities";
 
 @layer utilities {
+  .text-paragraph {
+    color: #6b7c93;
+  }
+
   .filter-invert {
     filter: invert(1);
   }
 
   .h-6-vw {
     height: 6vw;
+  }
+
+  .block {
+    display: inherit;
+  }
+
+  .inline-code {
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.2rem;
+    line-height: 1.5rem;
+    font-size: 80%;
+    background: #F1F1F1;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+    white-space: nowrap;
   }
 }

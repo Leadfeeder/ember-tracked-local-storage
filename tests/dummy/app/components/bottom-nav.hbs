@@ -1,0 +1,15 @@
+<div class="flex {{if this.previousRoute "justify-between" "justify-end"}}">
+  {{#if this.previousRoute}}
+    <LinkTo class="w-56 hover:bg-gray-200 p-2 transition duration-200 rounded" @route={{this.previousRoute.route}}>
+      <p>Previous</p>
+      <p class="text-blue text-lg">{{this.previousRoute.name}}</p>
+    </LinkTo>
+  {{/if}}
+
+  {{#if this.nextRoute}}
+    <LinkTo class="text-right w-56 hover:bg-gray-200 p-2 transition duration-200 rounded" @route={{this.nextRoute.route}}>
+      <p>Next</p>
+      <p class="text-blue text-lg">{{this.nextRoute.name}}</p>
+    </LinkTo>
+  {{/if}}
+</div>

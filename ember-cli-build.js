@@ -18,7 +18,6 @@ const purgeCSS = {
 
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
-
     postcssOptions: {
       compile: {
         plugins: [

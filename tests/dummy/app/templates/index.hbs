@@ -1,16 +1,19 @@
-<ContentSection @title="What is Ember Tracked Local Storage" as |content|>
+<ContentSection @title="Introduction" as |content|>
   <content.P>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    There are many use cases for working with the browser's local storage in a modern web application.
+    Perhaps you need a simple way to persist the state of a sidebar that has been hidden or expanded between your user's sessions.
+    Or maybe your want to store some text that was entered in a form to save the user having to type it again if they refresh the page.
   </content.P>
 
-  <content.Code
-    @code=
-"class ExampleComponent extends Component {
-  @trackedInLocalStorage({
-    format: 'object',
-  })
-  testProperty;
-}"
-    @language="javascript"
-  />
+  <content.P>
+    However, these situations require some rendering of the UI. With the change to the new auto-tracking system in Ember Octane, these properties stored in local storage
+    which determine these use cases now need to be marked as <code class="inline-code">@tracked</code>, as they
+    can no longer be a dependant key of a computed property.
+    How though, I hear you ask? Ember Tracked Local Storage to the rescue!
+  </content.P>
+
+  <content.P>
+    This addon provides a super simple way of storing and retrieving values in local storage, whilst ensuring
+    those values get correctly marked as tracked and cause UI re-renders when updated. Keep reading to find out how.
+  </content.P>
 </ContentSection>

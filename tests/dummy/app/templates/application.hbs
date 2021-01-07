@@ -1,14 +1,17 @@
-<div class="page-container">
+<div class="pb-12">
   <TopBar />
 
   <Header />
 
   <div class="container mx-auto flex mt-12">
-    <div class="w-4/12 mr-10">
-      <Navigation />
+    <div class="w-4/12 pr-4">
+      <SideNavigation @routes={{this.introductionRoutes}} @title="Getting started" />
+      <SideNavigation @routes={{this.apiReferenceRoutes}} @title="API Reference" />
     </div>
-    <div class="w-8/12">
+    <div class="w-8/12 pl-4">
       {{outlet}}
+
+      <BottomNav @routes={{this.allRoutes}} />
     </div>
   </div>
 </div>

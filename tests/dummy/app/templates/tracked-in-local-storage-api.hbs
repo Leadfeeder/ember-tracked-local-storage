@@ -1,0 +1,46 @@
+<ContentSection @title="trackedInLocalStorage decorator" as |content|>
+  <content.P>
+    These are the optional parameters you can pass into the <code class="inline-code">trackedInLocalStorage</code> decorator options hash:
+  </content.P>
+
+  <content.P>
+    <table class="table-auto">
+      <thead>
+        <tr>
+          <th class="p-2 text-center">Option name</th>
+          <th class="p-2 text-center">Default value</th>
+          <th class="p-2 text-center">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-4 py-2"><code class="inline-code">keyName</code><span class="italic text-sm">string</span></td>
+          <td class="border px-4 py-2"><code class="inline-code">undefined</code></td>
+          <td class="border px-4 py-2">Determines the name of the key to be used in local storage. If nothing is passed, the name of the decorated property will be used.</td>
+        </tr>
+        <tr class="bg-gray-100">
+          <td class="border px-4 py-2"><code class="inline-code">format</code><span class="italic text-sm">string</span></td>
+          <td class="border px-4 py-2"><code class="inline-code">'string'</code></td>
+          <td class="border px-4 py-2">
+            Should match the data type of the decorated property to tell the decorator how to normalize the value being read from local storage.
+            Available values are <LinkTo class="text-blue" @route="formats">listed here</LinkTo>.
+          </td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2"><code class="inline-code">defaultValue</code><span class="italic text-sm">any</span></td>
+          <td class="border px-4 py-2"><code class="inline-code">undefined</code></td>
+          <td class="border px-4 py-2">
+            Required to set the default value of the decorated property. Type should match the <code class="inline-code">format</code> option.
+          </td>
+        </tr>
+        <tr class="bg-gray-100">
+          <td class="border px-4 py-2"><code class="inline-code">skipPrefixes</code><span class="italic text-sm">string[]</span></td>
+          <td class="border px-4 py-2"><code class="inline-code">undefined</code></td>
+          <td class="border px-4 py-2">
+            Pass an array of prefixes which should be ignored for the decorated property (more info <LinkTo class="text-blue" @route="global-prefixes">here</LinkTo>).
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </content.P>
+</ContentSection>
