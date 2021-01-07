@@ -1,0 +1,76 @@
+<ContentSection @title="Global prefixes" as |content|>
+  <content.P>
+    You can set prefixes on the local storage keys so they are only accessed when needed.
+    This is useful if you want the values stored to be unique to a certain entity (e.g. user or account).
+  </content.P>
+
+  <content.P>
+    For example, imagine user A logs in, and enters information in a form. You save that information
+    into local storage, in case they refresh the page. However, if user A logs out and user B logs in using the
+    same browser, we don't want to show user B the information that user A has entered.
+  </content.P>
+
+  <content.P>
+    This is where using global prefixes comes in handy. To set one up, you can call the <code class="inline-code">setGlobalPrefix</code>
+    method of the service, passing in the id of the model:
+  </content.P>
+
+    <content.Code
+    @code=
+"import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default class UserRoute extends Route {
+  @service trackedLocalStorage;
+
+  model() {
+    // fetch user
+  }
+
+  afterModel(user) {
+    this.trackedLocalStorage.setGlobalPrefix('user', user.id)
+  }
+}
+"
+    @language="javascript"
+  />
+
+  <content.Note>
+    You would normally set the prefix straight after the place where you have loaded the model you wish to use.
+  </content.Note>
+
+  <content.P>
+    And that's it! Now every property using the <code class="inline-code">@trackedInLocalStorage</code> decorator will be unique to the current user.
+  </content.P>
+</ContentSection>
+
+<ContentSection @title="Skipping prefixes" as |content|>
+  <content.P>
+    You also have the option to ignore the prefix for certain properties if necessary. Imagine we have set a global prefix of <code class="inline-code">'user'</code> as in the example above.
+    To ignore this for a property, pass the prefix name into the decorator's <code class="inline-code">skipPrefixes</code> option array:
+  </content.P>
+
+  <content.Code
+    @code=
+"import Component from '@glimmer/component';
+
+export default class ExampleComponent extends Component {
+  @trackedInLocalStorage({ skipPrefixes: ['user'] }) allUsersCanSeeThis;
+}"
+    @language="javascript"
+  />
+
+  <content.P>
+    Now the <code class="inline-code">allUsersCanSeeThis</code> property will be stored and displayed to all users who log in on the same browser.
+  </content.P>
+
+  <content.P>
+    If manually removing the property using the tracked local storage service, you must pass the array as a second argument, e.g:
+  </content.P>
+
+    <content.Code
+      @code="this.trackedLocalStorage.removeItem(SOME_PROP_KEY, ['user']);"
+    @language="javascript"
+  />
+</ContentSection>
+

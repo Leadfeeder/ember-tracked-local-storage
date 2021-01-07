@@ -1,0 +1,76 @@
+<ContentSection @title="How to use it" as |content|>
+  <content.P>
+    The core use of this addon comes from the <code class="inline-code">trackedInLocalStorage</code> decorator:
+  </content.P>
+
+  <content.Code
+    @code="import { trackedInLocalStorage } from 'ember-tracked-local-storage';"
+    @language="javascript"
+  />
+
+  <content.P>
+    This decorator is a drop-in replacement for the standard glimmer <code class="inline-code">@tracked</code> decorator, and should
+    be used in all places where that would be used (i.e for any properties that may change over time). The difference being
+    that it has special getters and setters under the hood which sync the property with local storage and persist the value there between
+    sessions.
+  </content.P>
+
+  <content.P>
+    We'll use this component to demonstrate a simple use case example:
+  </content.P>
+
+  <content.Code
+    @code=
+"import Component from '@glimmer/component';
+import { trackedInLocalStorage } from 'ember-tracked-local-storage';
+import { action } from '@ember/object';
+
+export default class ColorDemoComponent extends Component {
+  colors = ['red', 'orange', 'yellow', 'green', 'indigo', 'pink'];
+
+  @trackedInLocalStorage({ defaultValue: 'red' }) currentColour;
+
+  @action
+  changeColour() {
+    this.currentColor = this.chooseRandomNewColor()
+  }
+
+  chooseRandomNewColor() {
+    const _colors = [...this.colors]
+    _colors.splice(this.colors.indexOf(this.currentColor), 1);
+    return _colors[Math.floor(Math.random() * _colors.length)];
+  }
+}"
+    @language="javascript"
+  />
+
+  <content.P>
+    Here we are decorating the <code class="inline-code">currentColour</code> property with our <code class="inline-code">@trackedInLocalStorage</code> decorator,
+    which creates a binding between this property in the component and a property of the same name in the browser's local storage.
+  </content.P>
+
+  <content.Note>
+    You'll see we are passing a <code class="inline-code">defaultValue</code> option into the decorator. This is necessary for the decorator to be able to sync with local storage, instead
+    of the usual <code class="inline-code">currentColour = 'red';</code>. There are a number of other options you can pass, which
+    you can explore in the <LinkTo class="text-blue" @route='tracked-in-local-storage-api'>API reference</LinkTo>.
+  </content.Note>
+
+  <content.P>
+    The component's template renders a simple square with a background color set by this property, which calls
+    the <code class="inline-code">changeColour</code> action when clicked:
+  </content.P>
+
+  <Demo::ColorDemo class="mt-4 mb-6" />
+
+  <content.P>
+    Try clicking the square. You'll see that:
+    <ol class="pl-10 my-2 list-decimal">
+      <li>The color of the square changes, meaning the property is being tracked correctly.</li>
+      <li>When you refresh the page, the current color of the square is persisted, meaning it is being stored and read from local storage correctly.</li>
+    </ol>
+  </content.P>
+
+  <content.P>
+    So, our two goals have been met! Pretty cool, right? :)
+  </content.P>
+</ContentSection>
