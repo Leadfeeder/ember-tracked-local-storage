@@ -16,4 +16,5 @@ Router.map(function() {
   this.route('api-reference');
   this.route('tracked-in-local-storage-api');
   this.route('tracked-local-storage-service-api');
+  this.route('application-tests');
 });
