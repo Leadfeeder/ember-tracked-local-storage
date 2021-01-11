@@ -50,7 +50,15 @@ export default class TrackedLocalStorage {
   getItem(keyName) {
     const { value } = this._getCell(keyName);
 
-    return value === DOES_NOT_EXIST ? null : value;
+    if (value === DOES_NOT_EXIST) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(value);
+    } catch (e) {
+      return value;
+    }
   }
 
   /**
@@ -61,9 +69,9 @@ export default class TrackedLocalStorage {
    * @returns {void}
    */
   setItem(keyName, value) {
-    const serializedValue = typeof value === 'string' ? value : JSON.stringify(value);
+    const serializedValue = JSON.stringify(value);
     this._getCell(keyName).value = serializedValue;
-    this._localStorage.setItem(keyName, value);
+    this._localStorage.setItem(keyName, serializedValue);
   }
 
   /**
@@ -104,7 +112,7 @@ export default class TrackedLocalStorage {
    * @returns {void}
    */
   triggerRerender() {
-    Object.values(this._cellsMap).forEach(cell => {
+    Object.values(this._cellsMap).forEach((cell) => {
       const x = cell.value;
       cell.value = x;
     });

@@ -5,7 +5,6 @@ export default class ApplicationController extends Controller {
     { route: 'index', name: 'Introduction' },
     { route: 'installation', name: 'Installation' },
     { route: 'how-to-use-it', name: 'How to use it' },
-    { route: 'formats', name: 'Formats' },
     { route: 'service-class', name: 'Tracked local storage service' },
     { route: 'global-prefixes', name: 'Global prefixes' },
   ];

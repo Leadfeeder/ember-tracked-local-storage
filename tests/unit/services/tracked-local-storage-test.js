@@ -64,7 +64,7 @@ module('Unit | Service | tracked local storage', function(hooks) {
   function assertSkipPrefixesWorks(assert, { skipPrefixes, expectedKey, label }) {
     trackedLocalStorage.setItem(testKey, testValue, skipPrefixes);
     let storedValue = window.localStorage.getItem(expectedKey);
-    assert.equal(storedValue, testValue, `set value is correct when skipping ${skipPrefixes} prefix`);
+    assert.equal(storedValue, JSON.stringify(testValue), `set value is correct when skipping ${skipPrefixes} prefix`);
 
     storedValue = trackedLocalStorage.getItem(testKey, skipPrefixes);
     assert.equal(storedValue, testValue, `get value is correct when skipping ${skipPrefixes} prefix`);
@@ -81,15 +81,15 @@ module('Unit | Service | tracked local storage', function(hooks) {
     assertSkipPrefixesWorks(assert, {
       skipPrefixes: ['user'],
       expectedKey: `2.${testKey}`,
-      label: 'user' }
-    )
+      label: 'user'
+    })
 
     // Skip account
     assertSkipPrefixesWorks(assert, {
       skipPrefixes: ['account'],
       expectedKey: `1.${testKey}`,
-      label: 'account' }
-    )
+      label: 'account'
+    })
 
     // Skip all
     assertSkipPrefixesWorks(assert, {

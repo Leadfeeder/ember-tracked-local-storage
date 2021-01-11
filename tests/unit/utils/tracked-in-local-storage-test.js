@@ -11,13 +11,12 @@ module('Unit | Utility | tracked in local storage decorator', function(hooks) {
   const testKeyName = 'test-key';
   let trackedLocalStorage;
 
-  function registerService({ keyName = testKeyName, defaultValue = testDefaultValue, skipPrefixes = [], format } = {}) {
+  function registerService({ keyName = testKeyName, defaultValue = testDefaultValue, skipPrefixes = [] } = {}) {
     this.owner.register('service:test-service', class DummyService extends Service {
       @trackedInLocalStorage({
         defaultValue,
         keyName,
         skipPrefixes,
-        format,
       })
       syncedProp;
     });
@@ -49,7 +48,7 @@ module('Unit | Utility | tracked in local storage decorator', function(hooks) {
 
   test('normalization works in the macro', function(assert) {
     const booleanKey = 'test-key-boolean';
-    let service = registerService.call(this, { keyName: booleanKey, format: 'boolean' });
+    let service = registerService.call(this, { keyName: booleanKey });
 
     assert.notOk(trackedLocalStorage.getItem(booleanKey), 'There is no value in LS yet');
     trackedLocalStorage.setItem(booleanKey, true);
