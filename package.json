@@ -1,6 +1,6 @@
 {
   "name": "ember-tracked-local-storage",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "For all your tracked local storage needs, when updating values held in browser storage should trigger a template rerender.",
   "keywords": [
     "ember-addon"
