@@ -19,6 +19,22 @@ Installation
 ember install ember-tracked-local-storage
 ```
 
+Usage
+------------------------------------------------------------------------------
+
+Simple use case:
+```
+import Component from '@glimmer/component';
+import { trackedInLocalStorage } from 'ember-tracked-local-storage';
+
+export default class DemoComponent extends Component {
+  @trackedInLocalStorage() someProperty;
+}
+```
+
+Full guides can be found on the [documentation site](https://leadfeeder.github.io/ember-tracked-local-storage).
+
+
 
 Contributing
 ------------------------------------------------------------------------------
