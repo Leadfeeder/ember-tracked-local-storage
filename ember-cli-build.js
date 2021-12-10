@@ -9,9 +9,11 @@ const purgeCSS = {
   options: {
     content: [
       // add extra paths here for components/controllers which include tailwind classes
-      './tests/dummy/app/templates/*.hbs',
-      './tests/dummy/app/components/*.hbs',
+      './tests/dummy/app/templates/**/*.hbs',
+      './tests/dummy/app/components/**/*.hbs',
+      './tests/dummy/app/components/demo/color-demo.js',
     ],
+    safelist: ['body', 'html'],
     defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
   }
 }
