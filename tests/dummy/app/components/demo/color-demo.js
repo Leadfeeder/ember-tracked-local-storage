@@ -24,8 +24,7 @@ export default class ColorDemoComponent extends Component {
 
   _chooseRandomNewColor() {
     const _colors = [...this.colors]
-    _colors.splice(this.colors.indexOf(this.currentColor),
-      1);
+    _colors.splice(this.colors.indexOf(this.currentColor), 1);
     return _colors[Math.floor(Math.random() * _colors.length)];
   }
 }
