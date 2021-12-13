@@ -3,10 +3,17 @@ import { trackedInLocalStorage } from 'ember-tracked-local-storage';
 import { action } from '@ember/object';
 
 export default class ColorDemoComponent extends Component {
-  colors = ['red', 'orange', 'yellow', 'green', 'indigo', 'pink'];
+  colors = [
+    'bg-red-400',
+    'bg-orange-400',
+    'bg-yellow-400',
+    'bg-green-400',
+    'bg-indigo-400',
+    'bg-pink-400'
+  ];
 
   @trackedInLocalStorage({
-    defaultValue: 'red'
+    defaultValue: 'bg-red-400'
   })
   currentColor;
 
