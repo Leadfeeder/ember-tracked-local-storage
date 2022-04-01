@@ -63,6 +63,9 @@
     "tailwindcss": "^3.0.23",
     "webpack": "5"
   },
+  "resolutions": {
+    "**/@glimmer/component/**/browserslist": "^4.16.5"
+  },
   "engines": {
     "node": "10.* || >= 12"
   },
