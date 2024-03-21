@@ -1,5 +1,4 @@
 export {
-  default,
   localStorageGet,
   localStorageSet,
   trackedInLocalStorage,
