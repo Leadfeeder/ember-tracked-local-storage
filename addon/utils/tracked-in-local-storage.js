@@ -75,3 +75,5 @@ function _getTrackedLocalStorageService(context) {
   const owner = context.owner || getOwner(context);
   return owner.lookup('service:tracked-local-storage');
 }
+
+export default trackedInLocalStorage;
